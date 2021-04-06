@@ -23,7 +23,7 @@
   </header>
 
 
-  <main class="col-12 flex-row justify-space-between">
+  <main class="row flex-row justify-space-between pt-4">
     <div class="col-12 col-md-4 vh-100">
 
       <div class="card">
@@ -34,14 +34,6 @@
         </form>
       </div>
 
-      <div class="card">
-        <h3 class="card-header text-uppercase">Previous Searches</h3>
-        <div id="language-buttons" class="card-body">
-          <button data-language="javascript" class="btn">JavaScript</button>
-          <button data-language="html" class="btn">HTML</button>
-          <button data-language="css" class="btn">CSS</button>
-        </div>
-      </div>
     </div>
 
 
@@ -53,22 +45,22 @@
         <p>Wind: <span id="wind-display"></span> MPH</p>
         <p>Humidity: <span id="humidity-display"></span>%</p>
         <p>UV Index: <span id="uvIndex-display"></span></p>
-        </div>
-    </div>
+      </div>
 
-
-
-    <div class="col-12 col-md-8">
-        <h2 class="list-group">5-Day Forecast: <span id="repo-search-term"></span> </h2>
-        <div class="row">
-            <div class="card col-"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+      <div class="col-12 col-md-8">
+        <h2 class="list-group">5-Day Forecast: </h2>
+        <div class="row" id="forecast-container">
+            <div class="card col-md-2"></div>
+            <div class="card col-md-2"></div>
+            <div class="card col-md-2"></div>
+            <div class="card col-md-2"></div>
+            <div class="card col-md-2"></div>
         </div>
 
+      </div>
+
     </div>
+
   </main>
 
   <script

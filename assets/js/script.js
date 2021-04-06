@@ -1,7 +1,7 @@
 var cityInputEl = document.querySelector('#cityName');
 var userFormEl = document.querySelector('#user-form');
 var cityNameContainerEl = document.querySelector('#cityName');
-var repoSearchTerm = document.querySelector('#repo-search-term');
+
 
 
 
@@ -12,11 +12,11 @@ var formSubmitHandler = function (event) {
   
     if (cityName) {
       getWeather(cityName);
-  
+      getForecast(cityName);
       cityNameContainerEl.textContent = '';
       cityInputEl.value = '';
     } else {
-      alert('Please enter a GitHub username');
+      alert('Please enter a valid city');
     }
 };
 
@@ -35,6 +35,21 @@ var getWeather = function (city) {
   });
 }
 
+var getForecast = function (city) {
+    var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=56c8a3ef9b920710fdace6246f366751';
+
+ fetch(forecastUrl)
+  .then(function (response) {
+    return response.json();
+
+  })
+  .then(function (data) {
+    console.log(data);
+    displayForecast(data, city);
+    
+  });
+}
+
 var displayWeather = function (data, city) {
     
     $('#divWeather').show();
@@ -44,6 +59,13 @@ var displayWeather = function (data, city) {
     $('#humidity-display').text(data.wind.speed);
     // $('#uvIndex-display').text(data.wind.speed);
     
+}
+
+var displayForecast = function (data, city) {
+  for (let i = 0; i < 4; i++) {
+    const element = array[i];
+    
+  }
 }
 
   userFormEl.addEventListener('submit', formSubmitHandler)

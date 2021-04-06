@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
   <link rel="stylesheet" href="./assets/css/style.css" />
-  <title>Git it Done</title>
+  <title>Weather Dashboard</title>
 </head>
 
 <body class="flex-column min-100-vh">
@@ -19,8 +19,8 @@
   </header>
 
 
-  <main class="flex-row justify-space-between">
-    <div class="col-12 col-md-4">
+  <main class="col-12 flex-row justify-space-between">
+    <div class="col-12 col-md-4 ">
 
       <div class="card">
         <h3 class="card-header text-uppercase">Search for a City:</h3>
@@ -40,17 +40,30 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-8">
-      <h2 class="subtitle">Showing Repositories for: <span id="repo-search-term"></span></h2>
-      <div id="weather-container" class="list-group"></div>
-    </div>
 
     <div class="col-12 col-md-8">
-        <h2 class="subtitle">5-Day Forecast: <span id="repo-search-term"></span></h2>
+      
+      <div id="divWeather" class="list-group" style="display: none;">
+        <h2 id="hCity"></h2>
+        <p>Temp: <span id="temp-display"></span> F</p>
+        <p>Wind: <span id="wind-display"></span> MPH</p>
+        <p>Humidity: <span id="humidity-display"></span>%</p>
+        <p>UV Index: <span id="uvIndex-display"></span></p>
+        </div>
+    </div>
+
+
+
+    <div class="col-12 col-md-8">
+        <h2 class="subtitle">5-Day Forecast: <span id="repo-search-term"></span> </h2>
         <div id="repos-container" class="list-group"></div>
       </div>
   </main>
 
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 

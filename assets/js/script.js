@@ -1,6 +1,6 @@
 var cityInputEl = document.querySelector('#cityName');
 var userFormEl = document.querySelector('#user-form');
-var repoContainerEl = document.querySelector('#repos-container');
+var cityNameContainerEl = document.querySelector('#cityName');
 var repoSearchTerm = document.querySelector('#repo-search-term');
 
 
@@ -13,7 +13,7 @@ var formSubmitHandler = function (event) {
     if (cityName) {
       getWeather(cityName);
   
-      repoContainerEl.textContent = '';
+      cityNameContainerEl.textContent = '';
       cityInputEl.value = '';
     } else {
       alert('Please enter a GitHub username');
@@ -38,12 +38,12 @@ var getWeather = function (city) {
 var displayWeather = function (data, city) {
     
     $('#divWeather').show();
-    
     $('#hCity').text(data.name);    
     $('#temp-display').text(data.main.temp);
     $('#wind-display').text(data.wind.speed);
     $('#humidity-display').text(data.wind.speed);
     // $('#uvIndex-display').text(data.wind.speed);
+    
 }
 
   userFormEl.addEventListener('submit', formSubmitHandler)

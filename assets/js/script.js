@@ -1,7 +1,7 @@
 var cityInputEl = document.querySelector('#cityName');
 var userFormEl = document.querySelector('#user-form');
 var cityNameContainerEl = document.querySelector('#cityName');
-
+var today = moment();
 
 
 // Handels the event listener for the actual form submission. Displays error if no valid input. Refreshes input.
@@ -54,9 +54,11 @@ var getForecast = function (city) {
 
 // This function shows the div that the data will be displayed on and pulls relavant information from the data before appending it. 
 var displayWeather = function (data, city) {
-    
+    var imageUrl = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png"
+
     $('#divWeather').show();
-    $('#hCity').text(data.name);    
+    $('#hCity').text(data.name + " " + today.format("MMM Do, YYYY"));
+    $('#hCity').append($('<img>',{src: imageUrl}))   
     $('#temp-display').text(data.main.temp);
     $('#wind-display').text(data.wind.speed);
     $('#humidity-display').text(data.wind.speed);
@@ -70,13 +72,19 @@ var displayForecast = function (data, city) {
   $('#divForecast').show();
   $('#forecast-container').children().remove('div');
   for (let i = 0; i < 5; i++) {
-    var dateEl = $('<h4>').text(data.list[i].dt);
-    var dataValueEl = $('<p>').text(data.list[i].main.temp);
-   
-   $('<div class="card col-md-2"/>').appendTo('#forecast-container');
-
+    var dateConversion = moment.unix(data.list[i].dt).format("MMM Do, YYYY");
+    var dateEl = $('<h4>').text(dateConversion);
+    var tempEl = $('<p>').text("Temp: " + data.list[i].main.temp + " F");
+    var windEl = $('<p>').text("Wind: " + data.list[i].wind.speed + " MPH");
+    var humidityEl = $('<p>').text("Humidity: " + data.list[i].main.humidity + " %");
+    var iconUrl = "http://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + ".png"
+    $('<div class="card col-md-2"/>').appendTo('#forecast-container');
+    
+    $('#forecast-container').children().eq(i).prepend($('<img>',{src: iconUrl}))
     $('#forecast-container').children().eq(i).append(dateEl);
-    $('#forecast-container').children().eq(i).append(dataValueEl);
+    $('#forecast-container').children().eq(i).append(tempEl);
+    $('#forecast-container').children().eq(i).append(windEl);
+    $('#forecast-container').children().eq(i).append(humidityEl);
   }
 }
 

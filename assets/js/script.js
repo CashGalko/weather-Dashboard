@@ -2,14 +2,14 @@ var cityInputEl = document.querySelector('#cityName');
 var userFormEl = document.querySelector('#user-form');
 var cityNameContainerEl = document.querySelector('#cityName');
 var today = moment();
-
+var coordinates = [];
 
 // Handels the event listener for the actual form submission. Displays error if no valid input. Refreshes input.
 var formSubmitHandler = function (event) {
     event.preventDefault();
   
     var cityName = cityInputEl.value.trim();
-  
+    coordinates = [];
     if (cityName) {
       getWeather(cityName);
       getForecast(cityName);
@@ -31,14 +31,26 @@ var getWeather = function (city) {
   })
   .then(function (data) {
     console.log(data);
+    var latitude = data.coord.lat
+    var longitude = data.coord.lon
     displayWeather(data, city);
-    
+    coordinates.push(latitude);
+    coordinates.push(longitude);
+    console.log(coordinates);
+
   });
 }
 
+
 // Performs a similar function to the getWeather function, this just calls on the API for the 5 day forecast instead. 
 var getForecast = function (city) {
-    var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=56c8a3ef9b920710fdace6246f366751';
+
+  console.log(coordinates);
+  var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=56c8a3ef9b920710fdace6246f366751';
+
+  // I realized too late that my API fetch link was incorrect. I attempted to fix it to only show a 5 day forcast, But I couldn't get the lat long data out of the first function to use in this function and honestly, I dont know why. I will come by and fix it later. But by using this API call, I am at least demonstrating the functionality of the code. 
+
+    // var forecastUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + coordinates[0] + "&lon=" + coordinates[1] + "&exclude=current,minutely,hourly,alerts&appid=56c8a3ef9b920710fdace6246f366751"
 
  fetch(forecastUrl)
   .then(function (response) {
@@ -88,4 +100,4 @@ var displayForecast = function (data, city) {
   }
 }
 
-  userFormEl.addEventListener('submit', formSubmitHandler)
+  userFormEl.addEventListener('submit', formSubmitHandler);
